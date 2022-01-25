@@ -37,14 +37,22 @@ fun CircularProgressBar(
 ) {
 //boolean to monitor if the animation has played
 
-    var isPlayed by remember { mutableStateOf(false) }
+    var animationPlayed by remember { mutableStateOf(false) }
 
 
     val currentPercentage = animateFloatAsState(
-        targetValue = if (isPlayed) percentage else 0f,
+        targetValue = if (animationPlayed) percentage else 0f,
         animationSpec = tween(
             durationMillis = animDuration,
             delayMillis = animDelay
         )
     )
+
+
+    //add launchEffect
+
+    LaunchedEffect(key1 = true, block = { animationPlayed = true})
+
+
+    
 }
