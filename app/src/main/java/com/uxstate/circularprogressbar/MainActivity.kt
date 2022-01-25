@@ -3,7 +3,9 @@ package com.uxstate.circularprogressbar
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.Composable
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
+import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -33,5 +35,16 @@ fun CircularProgressBar(
     animDuration: Int = 1000,
     animDelay: Int = 0
 ) {
+//boolean to monitor if the animation has played
 
+    var isPlayed by remember { mutableStateOf(false) }
+
+
+    val currentPercentage = animateFloatAsState(
+        targetValue = if (isPlayed) percentage else 0f,
+        animationSpec = tween(
+            durationMillis = animDuration,
+            delayMillis = animDelay
+        )
+    )
 }
