@@ -7,6 +7,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -28,6 +29,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             CircularProgressBarTheme {
 
+
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+
+                    CircularProgressBar(percentage = .9f, maxNumber = 1000)
+                }
             }
         }
     }
@@ -36,7 +42,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun CircularProgressBar(
     percentage: Float,
-    number: Int,
+    maxNumber: Int,
     fontSize: TextUnit = 28.sp,
     radius: Dp = 50.dp,
     color: Color = Color.Green,
@@ -85,7 +91,7 @@ fun CircularProgressBar(
         //text in the middle
 
         Text(
-            text = (currentPercentage * number).toInt() //change to int to get whole number
+            text = (currentPercentage * maxNumber).toInt() //change to int to get whole number
                     .toString(),
             color = Color.Black,
             fontSize = fontSize,
